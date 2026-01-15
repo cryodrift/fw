@@ -28,6 +28,13 @@ powerful SQLite tooling in a small, explicit codebase.
 
 CryoDrift is meant to be read, understood, and modified without surprises.
 
+## Mainclasses
+
+- Config, Main, Core, Handler
+- basically we run a Handlerchain that is defined in config
+### common handlers
+
+- Router, FileHandler (see base-config.php)
 
 ## Quickstart - WARNING remember THIS!
 
