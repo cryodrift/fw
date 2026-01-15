@@ -5,6 +5,7 @@
 namespace cryodrift\fw\cli;
 
 
+use cryodrift\fw\Config;
 use cryodrift\fw\Core;
 use cryodrift\fw\tool\Cli;
 
@@ -249,9 +250,13 @@ class CliUi
             $fnk($item, $k);
             $progress = $i / $cnt;
             $filledLength = (int)round($len * $progress);
-            Core::echoOn();
+            if (Config::isCli()) {
+                Core::echoOn();
+            }
             CliUi::echoTmpMsg(' ' . round($progress * 100) . '% ' . str_pad(str_pad('', $filledLength, '#'), $len, '_') . ' ' . $i . '/' . $cnt);
-            ob_start();
+            if (Config::isCli()) {
+                ob_start();
+            }
         }
         CliUi::echoLine(PHP_EOL . 'Finished in ' . Core::time());
     }
