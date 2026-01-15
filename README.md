@@ -42,26 +42,32 @@ CryoDrift is meant to be read, understood, and modified without surprises.
 
 - run this once (we dont need to migrate databases,download files everytime)
 ```bash
-   php index.php -echo -sessionuser="you@localhost.lan" /sys install -a -dir=src
+   php vendor/bin/cryodrift.php -echo -sessionuser="you@localhost.lan" /sys install
+   php vendor/bin/cryodrift.php /user/cli keygen
 ```
+
+#### ENV
+
+- put keys in  the .env file
+
 
 - run this everytime you change a config.php (regenerates the cached config files for cli and web)
 ```bash
-   php index.php -echo -sessionuser="you@localhost.lan" /sys install -dir=src -dir=vendor/cryodrift  
+   php vendor/bin/cryodrift.php -echo -sessionuser="you@localhost.lan" /sys install -dir=src -dir=vendor/cryodrift  
 ```
 
 ### Install packages (runs Cli::install in each App)
 
 - run this everytime you change the schema ()
 ```bash
-   php index.php -echo -sessionuser="you@localhost.lan" /sys modules -dir=src/yourapp
+   php vendor/bin/cryodrift.php -echo -sessionuser="you@localhost.lan" /sys modules -dir=src/yourapp
 ```
 
 ### Commandline
 
 - show routes and help
 ```bash
-   php index.php
+   php vendor/bin/cryodrift.php
 ```
 
 
