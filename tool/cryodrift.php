@@ -30,22 +30,27 @@ if (!defined('G_PHARROOT')) {
 Main::$rootdir = dirname(Phar::running(false)) ? dirname(Phar::running(false)) . '/' : dirname(__DIR__, 4) . '/';
 //allow overrides
 Config::$includedirs = [
-        '.',
-        './',
-        Main::$rootdir . 'src/',
-        Main::$rootdir . 'sys/',
-        Main::$rootdir,
-        Main::$rootdir . 'vendor/cryodrift/fw/',
-        Main::$rootdir . 'vendor/cryodrift/',
-        G_PHARROOT . '/src/',
-        G_PHARROOT . '/sys/',
-        G_PHARROOT . '/',
+  '.',
+  './',
+  Main::$rootdir . 'src/',
+  Main::$rootdir . 'sys/',
+  Main::$rootdir,
+  Main::$rootdir . 'vendor/cryodrift/fw/',
+  Main::$rootdir . 'vendor/cryodrift/',
+  G_PHARROOT . '/src/',
+  G_PHARROOT . '/sys/',
+  G_PHARROOT . '/',
 ];
 set_include_path(implode(PATH_SEPARATOR, Config::$includedirs));
 
 // Run in CLI mode
-$config = Main::readConfig('cli');
-Main::run($config);
+$config = Main::readConfig();
+$out = Main::run($config);
 
 // Exit code 0 for normal completion
-exit(0);
+if (Config::isCli()) {
+    echo $out;
+    exit(0);
+} else {
+    return $out;
+}
