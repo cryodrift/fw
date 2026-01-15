@@ -79,6 +79,7 @@ class Config extends ArrayObject implements \ArrayAccess
 
     public static function setSapi(string $php_sapi): void
     {
+        Core::echo(__METHOD__,'$php_sapi',$php_sapi);
         $php_sapi = match ($php_sapi) {
             'fpm-fcgi' => 'web',
             'cli-server' => 'web',

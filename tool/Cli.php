@@ -389,6 +389,7 @@ class Cli implements Handler, Configs
           2 => ["file", "php://stderr", "w"]
         ];
         $process = proc_open($command, $descriptorspec, $pipes);
+        $code = 0;
         if (is_resource($process)) {
             $code = proc_close($process);
         }
