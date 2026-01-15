@@ -376,9 +376,11 @@ class Cli implements Handler, Configs
      * @cli param [-port]= (default: 8989)
      * @cli param [-ip]= (default: localhost)
      */
-    protected function serv(string $port = '8989', string $ip = 'localhost'): int
+    protected function serv(string $port = '8989', string $ip = 'localhost', string $index = ''): int
     {
-        $index = G_PHARFILE ?: 'index.php';
+        if ($index === '') {
+            $index = G_PHARFILE ?: 'index.php';
+        }
         $command = 'php -S ' . $ip . ':' . $port . ' ' . $index;
 
         $descriptorspec = [
