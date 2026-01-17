@@ -3,7 +3,7 @@
     "description": "Small PHP framework for CLI, SSR, SQLite, and zero-logic templates",
     "type": "library",
     "license": "MIT",
-    "version": "0.1.44",
+    "version": "0.1.45",
     "require": {
         "php": ">=8.4"
     },
