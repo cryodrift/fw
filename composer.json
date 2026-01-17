@@ -3,9 +3,22 @@
     "description": "Small PHP framework for CLI, SSR, SQLite, and zero-logic templates",
     "type": "library",
     "license": "MIT",
-    "version": "0.1.45",
+    "version": "0.1.46",
     "require": {
-        "php": ">=8.4"
+        "php": ">=8.4",
+        "ext-pdo": "*",
+        "ext-fileinfo": "*",
+        "ext-intl": "*",
+        "ext-mbstring": "*",
+        "ext-zlib": "*",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "ext-openssl": "*",
+        "ext-exif": "*",
+        "ext-zip": "*",
+        "ext-bcmath": "*",
+        "ext-gd": "*",
+        "ext-gmp": "*"
     },
     "autoload": {
         "psr-4": {

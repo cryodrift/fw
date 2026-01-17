@@ -118,7 +118,7 @@ class Crypt
     }
 
 
-    public static function decrypt(string $data, string $key, bool $private = true)
+    public static function decrypt(string $data, string $key, bool $private = true): string
     {
         if ($private) {
             openssl_private_decrypt($data, $out, $key);
@@ -128,7 +128,7 @@ class Crypt
         return $out;
     }
 
-    public static function encrypt(string $data, string $key, bool $public = true)
+    public static function encrypt(string $data, string $key, bool $public = true): string
     {
         if ($public) {
             openssl_public_encrypt($data, $out, $key);
@@ -185,7 +185,7 @@ class Crypt
         return pack("N", strlen($data)) . $data;
     }
 
-    public static function getRandomUuid()
+    public static function getRandomUuid(): string
     {
         return base64_encode(openssl_random_pseudo_bytes(32));
     }
