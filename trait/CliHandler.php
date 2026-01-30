@@ -54,6 +54,8 @@ trait CliHandler
                 $this->missingparam = $ex->getMessage();
             } catch (\ArgumentCountError $ex) {
                 $this->missingparam = $ex->getMessage();
+            } catch (\InvalidArgumentException $ex) {
+                $this->missingparam = $ex->getMessage();
             }
         }
 

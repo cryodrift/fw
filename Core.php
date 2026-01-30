@@ -4,6 +4,7 @@
 
 namespace cryodrift\fw;
 
+use cryodrift\fw\interface\Params;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveFilterIterator;
@@ -173,6 +174,7 @@ class Core
                     $params[$name] = new Config(self::getConfig($classname, $ctx, $optional));
                 }
                 break;
+            case self::hasInterface($type, Params::class):
             case self::hasInterface($type, Param::class):
                 if (array_key_exists($name, $source)) {
                     $params[$name] = new $type($ctx, $name, Core::getValue($name, $source, '', true));
