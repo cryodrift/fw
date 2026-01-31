@@ -30,28 +30,6 @@ class FileHandler implements Handler, Configs
         return $ctx;
     }
 
-    protected function handleFile(string $pathname, Context $ctx): Context
-    {
-        $pathname = Main::path($pathname);
-        if ($pathname) {
-            $fileInfo = new SplFileInfo($pathname);
-            if (!$fileInfo->isFile() || $fileInfo->getSize() < 1) {
-                header(Response::HEADER_NOTFOUND);
-                exit;
-            }
-            $headers = self::getHeaders($fileInfo, $this->config->cacheDuration);
-
-            if (self::isCached($fileInfo, $ctx)) {
-                $headers[] = Response::HEADER_NOTMODIFIED;
-            } else {
-                $ctx->response()->setContent(Core::fileReadOnce($pathname));
-            }
-
-            $ctx->response()->setHeaders($headers);
-            $ctx->response()->status(Response::STATUS_VALID);
-        }
-        return $ctx;
-    }
 
     public static function getHeaders(\SplFileInfo $fileInfo, int $duration): array
     {
@@ -170,6 +148,29 @@ class FileHandler implements Handler, Configs
             $config['files'][$route] = $pathname;
         }
         $ctx->config()->addHandler(self::class, $config);
+    }
+
+    protected function handleFile(string $pathname, Context $ctx): Context
+    {
+        $pathname = Main::path($pathname);
+        if ($pathname) {
+            $fileInfo = new SplFileInfo($pathname);
+            if (!$fileInfo->isFile() || $fileInfo->getSize() < 1) {
+                header(Response::HEADER_NOTFOUND);
+                exit;
+            }
+            $headers = self::getHeaders($fileInfo, $this->config->cacheDuration);
+
+            if (self::isCached($fileInfo, $ctx)) {
+                $headers[] = Response::HEADER_NOTMODIFIED;
+            } else {
+                $ctx->response()->setContent(Core::fileReadOnce($pathname));
+            }
+
+            $ctx->response()->setHeaders($headers);
+            $ctx->response()->status(Response::STATUS_VALID);
+        }
+        return $ctx;
     }
 
 }
